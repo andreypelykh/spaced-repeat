@@ -1,0 +1,13 @@
+<nav class="navbar">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row class="container">
+      <a routerLinkActive="active" routerLink="/repeat">Repeat</a>
+      <a routerLinkActive="active" routerLink="/study">Study</a>
+      <div class="spacer"></div>
+      <a (click)="logout()">Logout</a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</nav>
+<div class="main-content container">
+  <router-outlet></router-outlet>
+</div>

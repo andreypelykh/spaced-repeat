@@ -1,0 +1,8 @@
+<h2 class="page-title">
+  Repeat today</h2>
+
+<mat-selection-list #units (selectionChange)="onSelect($event.option.value)">
+  <mat-list-option *ngFor="let unit of units$ | async; trackBy: unitTrackBy" [selected]="unit.checked" [value]="unit">
+    {{unit.text}}
+  </mat-list-option>
+</mat-selection-list>

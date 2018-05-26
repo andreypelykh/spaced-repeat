@@ -1,0 +1,28 @@
+.container {
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar {
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.navbar a:hover {
+  opacity: 0.8;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.main-content {
+  padding: 10px 15px;
+}

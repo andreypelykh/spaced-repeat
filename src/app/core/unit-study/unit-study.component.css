@@ -1,0 +1,22 @@
+.add-unit-form {
+}
+
+.add-unit-form__row {
+  display: flex;
+  align-items: center;
+}
+
+.add-unit-form__field {
+  width: 100%;
+}
+
+.add-unit-form__btn {
+  padding: 0 10px;
+  margin-left: 10px;
+  min-width: auto;
+}
+
+.remove-btn {
+  min-width: auto;
+  padding: 0 10px;
+}

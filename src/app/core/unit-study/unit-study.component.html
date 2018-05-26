@@ -1,0 +1,29 @@
+<h2 class="page-title">Study today</h2>
+
+<div class="add-unit-form">
+  <div class="add-unit-form__row">
+    <mat-form-field class="add-unit-form__field">
+      <input matInput placeholder="New unit..." #newUnitText (keyup.enter)="addUnit(newUnitText.value); newUnitText.value = '';">
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="add-unit-form__btn" (click)="addUnit(newUnitText.value); newUnitText.value = '';">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-list>
+  <ng-container *ngFor="let unit of units$ | async; trackBy: unitTrackBy; last as isLast">
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <span matLine>{{ unit.text }}</span>
+
+      <button mat-raised-button color="warn" class="remove-btn" (click)="removeUnit(unit.key)">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-divider *ngIf="isLast"></mat-divider>
+  </ng-container>
+  <div *ngIf="(units$ | async)?.length == 0">
+    There are no units yet
+  </div>
+</mat-list>
