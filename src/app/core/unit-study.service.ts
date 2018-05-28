@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import {
   AngularFireDatabase,
   AngularFireList,
@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { map, switchMap, flatMap, tap, filter } from 'rxjs/operators';
-import { todayStartMs } from './time.uitils';
+import { TODAY_START_MS } from './time.uitils';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class UnitStudyService {
     map(user => user.uid),
     map(uid =>
       this.db.list(`units/${uid}`, ref =>
-        ref.orderByChild('time').startAt(todayStartMs())
+        ref.orderByChild('time').startAt(this.todayStartMs())
       )
     ),
     tap(ref => (this.unitsRef = ref)),
@@ -33,7 +33,8 @@ export class UnitStudyService {
 
   constructor(
     private db: AngularFireDatabase,
-    private authService: AuthService
+    private authService: AuthService,
+    @Inject(TODAY_START_MS) private todayStartMs
   ) {}
 
   addUnit(text: string) {

@@ -17,6 +17,12 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SPACED_REPEAT_APP_CONFIG } from '../app.config';
 import { AuthService } from './auth.service';
 import { UnitStudyService } from './unit-study.service';
+import {
+  todayStartMs,
+  TODAY_START_MS,
+  TODAY_END_MS,
+  todayEndMs
+} from './time.uitils';
 
 @NgModule({
   imports: [
@@ -36,6 +42,11 @@ import { UnitStudyService } from './unit-study.service';
     UnitStudyComponent
   ],
   exports: [AppRoutingModule],
-  providers: [AuthService, UnitStudyService]
+  providers: [
+    AuthService,
+    UnitStudyService,
+    { provide: TODAY_START_MS, useValue: todayStartMs },
+    { provide: TODAY_END_MS, useValue: todayEndMs }
+  ]
 })
 export class CoreModule {}

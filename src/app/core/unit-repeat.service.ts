@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from './auth.service';
 import { map, filter, tap, switchMap } from 'rxjs/operators';
-import { todayStartMs, timeStartMs } from './time.uitils';
+import { TODAY_START_MS, TODAY_END_MS, timeStartMs } from './time.uitils';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class UnitRepeatService {
           return {
             key: c.payload.key,
             ...unit,
-            checked: unit.time >= todayStartMs() && unit.daysToRepeat > 1
+            checked: unit.time >= this.todayStartMs() && unit.daysToRepeat > 1
           };
         })
         .filter(unit => {
@@ -32,7 +32,7 @@ export class UnitRepeatService {
           return (
             unit.checked ||
             timeStartMs(unit.time) + unit.daysToRepeat * 24 * 3600 * 1000 <=
-              todayStartMs()
+              this.todayStartMs()
           );
         })
     )
@@ -40,7 +40,9 @@ export class UnitRepeatService {
 
   constructor(
     private db: AngularFireDatabase,
-    private authService: AuthService
+    private authService: AuthService,
+    @Inject(TODAY_START_MS) private todayStartMs,
+    @Inject(TODAY_END_MS) private todayEndMs
   ) {}
 
   toggleCheckUnit(unit) {
@@ -54,7 +56,7 @@ export class UnitRepeatService {
   private check(unit) {
     return this.unitsRef.update(unit.key, {
       text: unit.text,
-      time: todayStartMs(),
+      time: this.todayStartMs(),
       daysToRepeat: unit.daysToRepeat + 1
     });
   }
@@ -62,7 +64,7 @@ export class UnitRepeatService {
   private uncheck(unit) {
     return this.unitsRef.update(unit.key, {
       text: unit.text,
-      time: todayStartMs() - unit.daysToRepeat,
+      time: this.todayStartMs() - unit.daysToRepeat,
       daysToRepeat: unit.daysToRepeat - 1
     });
   }
