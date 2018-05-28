@@ -11,8 +11,8 @@
   </div>
 </div>
 
-<mat-list>
-  <ng-container *ngFor="let unit of units$ | async; trackBy: unitTrackBy; last as isLast">
+<mat-list *ngIf="units$ | async as units">
+  <ng-container *ngFor="let unit of units; trackBy: unitTrackBy; last as isLast">
     <mat-divider></mat-divider>
     <mat-list-item>
       <span matLine>{{ unit.text }}</span>
@@ -23,7 +23,7 @@
     </mat-list-item>
     <mat-divider *ngIf="isLast"></mat-divider>
   </ng-container>
-  <div *ngIf="(units$ | async)?.length == 0">
+  <div *ngIf="units?.length == 0">
     There are no units yet
   </div>
 </mat-list>

@@ -10,14 +10,12 @@ import { MatSelectionListChange } from '@angular/material';
   styleUrls: ['./unit-repeat.component.css']
 })
 export class UnitRepeatComponent implements OnInit {
-  units$;
+  units$ = this.unitRepeatService.units$;
   unitTrackBy: (index: any, item: any) => any = unitTrackBy;
 
   constructor(private unitRepeatService: UnitRepeatService) {}
 
-  ngOnInit() {
-    this.units$ = this.unitRepeatService.units;
-  }
+  ngOnInit() {}
 
   onSelect(unit) {
     this.unitRepeatService.toggleCheckUnit(unit);

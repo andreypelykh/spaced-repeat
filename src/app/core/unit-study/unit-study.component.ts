@@ -8,14 +8,12 @@ import { unitTrackBy } from '../unit.track-by';
   styleUrls: ['./unit-study.component.css']
 })
 export class UnitStudyComponent implements OnInit {
-  units$;
+  units$ = this.unitStudyService.units$;
   unitTrackBy: (index: any, item: any) => any = unitTrackBy;
 
   constructor(private unitStudyService: UnitStudyService) {}
 
-  ngOnInit() {
-    this.units$ = this.unitStudyService.units;
-  }
+  ngOnInit() {}
 
   addUnit(value) {
     if (!value) {
