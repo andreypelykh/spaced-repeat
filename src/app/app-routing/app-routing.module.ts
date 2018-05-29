@@ -9,7 +9,7 @@ import { UnitRepeatComponent } from '../core/unit-repeat/unit-repeat.component';
 import { UnitStudyComponent } from '../core/unit-study/unit-study.component';
 import { AuthGuard } from './auth.guard';
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   {
     path: '',
     component: ShellComponent,
